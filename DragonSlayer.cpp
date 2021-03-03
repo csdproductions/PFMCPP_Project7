@@ -28,12 +28,17 @@ void DragonSlayer::attack(Character& other)
     {
         //assert(false);
         //DragonSlayers get a 10x boost when attacking dragons, from their attack item.
-        //so they should USE their attack item before attacking the dragon... 
-        //note that items are single-use only, so you need to reset it after use.  
-        //look in the Character class for how the other item types are reset after use.
-
-        attackItem->use(this);
-        attackItem.reset();
+        
+        // check if attack item is valid
+        if(attackItem != nullptr)
+        {
+            //so they should USE their attack item before attacking the dragon... 
+            attackItem->use(this);
+            //note that items are single-use only, so you need to reset it after use.  
+            //look in the Character class for how the other item types are reset after use.
+            attackItem.reset();
+        }
+            
 
         while( dragon->getHP() > 0 )
         {

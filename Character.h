@@ -63,7 +63,7 @@ protected:
     int attackDamage;
     bool isDefending = false;
 
-    void boostPointsAfterWin(int& val, std::unique_ptr<int>& initVal);
+    void boostPointsAfterWin(int& val, int& initVal);
 private:
     std::unique_ptr<int> initialHitPoints, initialArmorLevel, initialAttackDamage;
     

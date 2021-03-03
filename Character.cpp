@@ -95,29 +95,29 @@ void Character::attackInternal(Character& other)
         When you defeat another Character: 
         */
 
-        boostPointsAfterWin(hitPoints, initialHitPoints);
+        boostPointsAfterWin(hitPoints, *initialHitPoints);
 
-        boostPointsAfterWin(armor, initialArmorLevel);
+        boostPointsAfterWin(armor, *initialArmorLevel);
 
-        boostPointsAfterWin(attackDamage, initialAttackDamage);
+        boostPointsAfterWin(attackDamage, *initialAttackDamage);
 
         std::cout << getName() << " defeated " << other.getName() << " and leveled up!" << std::endl;        
     }
 }
 
-void Character::boostPointsAfterWin(int& val, std::unique_ptr<int>& initVal)
+void Character::boostPointsAfterWin(int& val, int& initVal)
 {
     // a) your stats are restored to their initial value if they are lower than it.
-    if(val < *initVal )
+    if(val < initVal )
     {
-        val = *initVal;
+        val = initVal;
     }
 
     // b) your stats are boosted 10%
     val *= 1.1;
 
     // c) the initial value of your stats is updated to reflect this boosted stat for the next time you defeat another character.
-    *initVal = val;
+    initVal = val;
 }
 
 void Character::printStats()
@@ -126,8 +126,7 @@ void Character::printStats()
     /*
     make your getStats() use a function from the Utility.h
     */
-
-    std::cout << getCharacterStats(this); 
+    std::cout << getStats(); 
     
     std::cout << std::endl;
     std::cout << std::endl;
